@@ -2,6 +2,7 @@ package com.desafiophilippe.crudclientes.controllers;
 
 import com.desafiophilippe.crudclientes.dto.ClientDTO;
 import com.desafiophilippe.crudclientes.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto){
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
